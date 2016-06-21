@@ -40,7 +40,7 @@ global nextState
 thisState = 0 
 nextState = 1
 
-# The Threshold is the maximum sccumulated value that must be exceeded before
+# The Threshold is the maximum accumulated value that must be exceeded before
 # the Neurite will fire
 threshold = 30
 
@@ -4908,14 +4908,14 @@ def runconnectome():
                 # fired neurons keep getting reset to previous weight
                 # wtf deepcopy -- So, the concern is that the deepcopy doesnt
                 # scale up to larger neural networks?? 
-                postSynaptic[ps][thisState] = copy.deepcopy(postSynaptic[ps][nextState]) 
+                postSynaptic[ps][thisState] = copy.deepcopy(postSynaptic[ps][nextState])
 
                 # this deep copy is not in the functioning version currently.
                 # print "After Clone: ", postSynaptic[ps][thisState]
 
         thisState,nextState=nextState,thisState
 
-# Create the dictionary      
+# Create the dictionary
 createpostSynaptic()
 
 dist=0
@@ -4989,4 +4989,3 @@ def keyboard_interrupt_handler(a, b):
 if __name__ == '__main__':
         signal.signal(signal.SIGINT, keyboard_interrupt_handler)
         main()
-

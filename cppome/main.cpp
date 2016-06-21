@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "connectome.h"
 #include "worm.h"
@@ -13,10 +14,13 @@ void initialize_network(int* network_state) {
 void update_network(int* network_state) {
   int new_network_state[NUM_NEURONS];
   for (int i=0; i < NUM_NEURONS; i++) {
-    if network_state[i] >= THRESHOLD {
-	for (int j=0; j < 
+    if (network_state[i] >= THRESHOLD) {
+      for (int j=0; j<num_connections[i]; j++) {
+  	new_network_state[connectome[i][2*j]] += connectome[i][2*j+1]; // fix this sometime, connectome should not have weights
+      }
     }
   }
+  memcpy(network_state, &new_network_state, NUM_NEURONS*sizeof(int));
 }
 void visualize_network(int* network_state) {
   // Update a static image of the worm's neural network based on the innervation
@@ -36,6 +40,7 @@ int main() {
   int *network_state = (int*) malloc(NUM_NEURONS * sizeof(int));
   Worm *worm = new Worm();
   initialize_network(network_state);
+  
   printf("Running network.\n");
   while(1) {
     update_network(network_state);
