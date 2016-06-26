@@ -5,4 +5,7 @@ all: main
 main: main.cpp
 	g++ -c main.cpp $(CPPFLAGS)
 	g++ main.o -o main
-	./main
+
+clean:
+	rm *~
+	rm *.o

@@ -31,7 +31,7 @@ enum Neurons
   MVL05, MVR06, MVL04, MVL06, MDL06, MDR06, MVR24};
 
 const int NUM_NEURONS = MVR24 + 1;
-const int NUM_FUNCTIONAL_NEURONS = VD13 + 1;
+const int NUM_NONMOTOR_NEURONS = VD13 + 1;
 
 const char* neuron_names[] = {"ADAL", "ADAR", "ADEL", "ADER", "ADFL", "ADFR", "ADLL",
   "ADLR", "AFDL", "AFDR", "AIAL", "AIAR", "AIBL", "AIBR", "AIML", "AIMR", "AINL",
@@ -1068,7 +1068,7 @@ const int VD12_connections[] = {MVL19, 5, MVL21, 5, MVR19, 5, MVR22, 5, VA11, 3,
 const int VD13_connections[] = {AVAR, 2, MVL21, 9, MVL22, 9, MVL23, 9, MVR21, 9,
        MVR22, 9, MVR23, 9, MVR24, 9, PVCL, 1, PVCR, 1, PVPL, 2, VA12, 1};
 
-const int* connectome[] = {ADAL_connections, ADAR_connections,
+const int* connectome[NUM_NONMOTOR_NEURONS] = {ADAL_connections, ADAR_connections,
   ADEL_connections, ADER_connections, ADFL_connections,
   ADFR_connections, ADLL_connections, ADLR_connections,
   AFDL_connections, AFDR_connections, AIAL_connections,
@@ -1162,22 +1162,20 @@ const int* connectome[] = {ADAL_connections, ADAR_connections,
   VD7_connections, VD8_connections, VD9_connections, VD10_connections,
   VD11_connections, VD12_connections, VD13_connections};
 
-const int num_connections[] = {19, 17, 29, 20, 8, 14, 19, 16, 4, 4,
-15, 13, 19, 19, 17, 13, 9, 13, 9, 8, 15, 15, 6, 12, 7, 4, 6, 21, 10,
-9, 12, 7, 9, 10, 8, 6, 7, 6, 12, 9, 11, 5, 5, 16, 18, 10, 9, 5, 4, 6,
-9, 8, 9, 51, 56, 42, 40, 23, 28, 21, 24, 17, 15, 19, 19, 16, 17, 12,
-28, 19, 17, 17, 9, 14, 9, 12, 9, 7, 12, 9, 8, 11, 19, 22, 15, 17, 10,
-18, 13, 15, 12, 15, 7, 8, 16, 20, 17, 20, 14, 9, 9, 13, 13, 11, 8, 9,
-9, 10, 39, 11, 20, 13, 16, 19, 26, 5, 5, 3, 3, 3, 4, 5, 7, 13, 8, 14,
-17, 8, 9, 8, 9, 13, 13, 11, 10, 10, 10, 4, 6, 7, 12, 13, 9, 7, 8, 6,
-12, 10, 10, 16, 16, 8, 11, 13, 12, 6, 5, 10, 8, 11, 10, 7, 12, 9, 7,
-4, 13, 2, 2, 8, 34, 38, 6, 7, 10, 21, 24, 20, 22, 8, 17, 26, 16, 5, 5,
-15, 18, 24, 24, 15, 10, 15, 9, 14, 22, 16, 25, 20, 26, 3, 3, 15, 24,
-13, 18, 11, 13, 18, 13, 17, 22, 11, 6, 4, 13, 10, 3, 26, 21, 6, 7, 6,
-8, 10, 6, 4, 3, 3, 9, 13, 1, 1, 1, 1, 2, 3, 5, 4, 12, 13, 11, 11, 18,
-13, 16, 14, 6, 9, 8, 9, 10, 14, 10, 12, 8, 8, 13, 11, 8, 12, 15, 13,
-11, 10, 14, 20, 17, 6, 10, 22, 21, 22, 12, 11, 9, 14, 6, 15, 16, 12,
-12, 15, 16, 22, 7, 10, 1, 13, 10, 9, 8, 8, 11, 7, 4, 6, 9, 7, 8, 12};
-
-// Todo: fill in connectome array with X_connections and sizes of each array_connections, 
-// then fill in update_network function
+const int num_connections[NUM_NONMOTOR_NEURONS] = {19, 17, 29, 20, 8,
+14, 19, 16, 4, 4, 15, 13, 19, 19, 17, 13, 9, 13, 9, 8, 15, 15, 6, 12,
+7, 4, 6, 21, 10, 9, 12, 7, 9, 10, 8, 6, 7, 6, 12, 9, 11, 5, 5, 16, 18,
+10, 9, 5, 4, 6, 9, 8, 9, 51, 56, 42, 40, 23, 28, 21, 24, 17, 15, 19,
+19, 16, 17, 12, 28, 19, 17, 17, 9, 14, 9, 12, 9, 7, 12, 9, 8, 11, 19,
+22, 15, 17, 10, 18, 13, 15, 12, 15, 7, 8, 16, 20, 17, 20, 14, 9, 9,
+13, 13, 11, 8, 9, 9, 10, 39, 11, 20, 13, 16, 19, 26, 5, 5, 3, 3, 3, 4,
+5, 7, 13, 8, 14, 17, 8, 9, 8, 9, 13, 13, 11, 10, 10, 10, 4, 6, 7, 12,
+13, 9, 7, 8, 6, 12, 10, 10, 16, 16, 8, 11, 13, 12, 6, 5, 10, 8, 11,
+10, 7, 12, 9, 7, 4, 13, 2, 2, 8, 34, 38, 6, 7, 10, 21, 24, 20, 22, 8,
+17, 26, 16, 5, 5, 15, 18, 24, 24, 15, 10, 15, 9, 14, 22, 16, 25, 20,
+26, 3, 3, 15, 24, 13, 18, 11, 13, 18, 13, 17, 22, 11, 6, 4, 13, 10, 3,
+26, 21, 6, 7, 6, 8, 10, 6, 4, 3, 3, 9, 13, 1, 1, 1, 1, 2, 3, 5, 4, 12,
+13, 11, 11, 18, 13, 16, 14, 6, 9, 8, 9, 10, 14, 10, 12, 8, 8, 13, 11,
+8, 12, 15, 13, 11, 10, 14, 20, 17, 6, 10, 22, 21, 22, 12, 11, 9, 14,
+6, 15, 16, 12, 12, 15, 16, 22, 7, 10, 1, 13, 10, 9, 8, 8, 11, 7, 4, 6,
+9, 7, 8, 12};
