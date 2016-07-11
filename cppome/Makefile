@@ -10,16 +10,16 @@ endif
 
 all: main
 
-opengl_test: opengl_test.cpp
-	g++ $(CPPFLAGS) -c opengl_test.cpp 
-	g++ opengl_test.o -o opengl_test $(LIBRARIES)
+visualization.o: visualization.cpp
+	g++ $(CPPFLAGS) -c visualization.cpp
 
-#g++ -Wall -march=i686 -g -I /usr/share/doc/NVIDIA_GLX-1.0/include/ -o Dov2b -L /usr/lib -L /usr/X11R6/lib -L/usr/local/lib Dov2.cc -lGL -lGLU -lglut
+main.o: main.cpp header.h connectome.h
+	g++ $(CPPFLAGS) -c main.cpp 
 
-main: main.cpp
-	g++ -c main.cpp $(CPPFLAGS)
-	g++ main.o -o main
+main: main.o visualization.o
+	g++ main.o visualization.o -o main $(LIBRARIES)
 
 clean:
-	rm *~
-	rm *.o
+	rm -f *~
+	rm -f *.o
+	rm -f main
