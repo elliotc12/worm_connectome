@@ -14,10 +14,13 @@ visualization.o: visualization.cpp
 	g++ $(CPPFLAGS) -c visualization.cpp
 
 main.o: main.cpp header.h connectome.h
-	g++ $(CPPFLAGS) -c main.cpp 
+	g++ $(CPPFLAGS) -c main.cpp
 
-main: main.o visualization.o
-	g++ main.o visualization.o -o main $(LIBRARIES)
+worm.o: worm.cpp header.h connectome.h
+	g++ $(CPPFLAGS) -c worm.cpp 
+
+main: main.o visualization.o worm.o
+	g++ main.o visualization.o worm.o -o main $(LIBRARIES)
 
 clean:
 	rm -f *~

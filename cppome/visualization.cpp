@@ -116,13 +116,17 @@ void initialize_visualization() {
 			0);        // spacing between tuples (datapoints)
 
   glEnableVertexAttribArray(posAttrib);
+  if (!glGetError()) {
+    printf("There was an error initializing OpenGL.\n");
+    exit(glGetError());
+  }
 }
 
 int simulation_is_running() {
   return !glfwWindowShouldClose(window);
 }
 
-void update_visualization(int* network_state, int num_neurons) {
+void update_visualization(Worm* worm) {
   glDrawArrays(GL_TRIANGLES, 0, 3);
   glfwSwapBuffers(window);
   glfwPollEvents();

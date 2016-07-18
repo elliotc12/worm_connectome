@@ -1,3 +1,6 @@
+#ifndef CONNECTOME_H
+#define CONNECTOME_H
+
 enum Neurons
   {ADAL, ADAR, ADEL, ADER, ADFL, ADFR, ADLL, ADLR, AFDL, AFDR, AIAL, AIAR, AIBL,
   AIBR, AIML, AIMR, AINL, AINR, AIYL, AIYR, AIZL, AIZR, ALA, ALML, ALMR, ALNL, ALNR,
@@ -1179,3 +1182,5 @@ const int num_connections[NUM_NONMOTOR_NEURONS] = {19, 17, 29, 20, 8,
 8, 12, 15, 13, 11, 10, 14, 20, 17, 6, 10, 22, 21, 22, 12, 11, 9, 14,
 6, 15, 16, 12, 12, 15, 16, 22, 7, 10, 1, 13, 10, 9, 8, 8, 11, 7, 4, 6,
 9, 7, 8, 12};
+
+#endif // CONNECTOME_H
