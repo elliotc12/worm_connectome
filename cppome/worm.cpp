@@ -7,8 +7,8 @@
 
 Worm::Worm() {
   network = (int*) malloc(NUM_NEURONS * sizeof(int));
-  x = (int*) malloc(NUM_NEURONS * sizeof(int));
-  y = (int*) malloc(NUM_NEURONS * sizeof(int));
+  x = (double*) malloc(NUM_NEURONS * sizeof(double));
+  y = (double*) malloc(NUM_NEURONS * sizeof(double));
   
   for (int i=0; i < NUM_NEURONS; i++) {
     network[i] = 0;
@@ -18,7 +18,6 @@ Worm::Worm() {
     x[i] = 0;
     y[i] = 0;
   }
-  
 }
 
 void Worm::update_network() {
@@ -36,4 +35,19 @@ void Worm::update_network() {
 }
 
 void Worm::update_positions() {
+  x[AVBR]  = -1.0;
+  x[RMGL]  =  0.0;
+  x[RMGR]  =  0.0;
+  x[ADAL]  =  2.0;
+  x[ADAR]  =  2.0;
+  x[MDL05] =  3.0;
+  x[MDR05] =  3.0;
+
+  y[AVBR] =   0.0;
+  y[RMGL] =  -1.0; 
+  y[RMGR] =   1.0; 
+  y[ADAL] =  -0.75; 
+  y[ADAR] =   0.75; 
+  y[MDL05] = -0.9;
+  y[MDR05] =  0.9;
 }
